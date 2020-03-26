@@ -1,4 +1,4 @@
-package com.sapient.al2;
+package com.sapient.al;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
