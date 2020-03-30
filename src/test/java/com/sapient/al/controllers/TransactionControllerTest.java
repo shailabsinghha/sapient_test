@@ -8,6 +8,7 @@ import com.sapient.al.service.files.FileServiceFactory;
 import com.sapient.al.service.rules.TransactionRulesImpl;
 import com.sapient.al.service.transactions.TransactionService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.compress.utils.IOUtils;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -88,9 +89,7 @@ class TransactionControllerTest {
 
 
                 FileService fileService = new CsvFileServiceImpl();
-                byte[] test = new
-                        FileInputStream( new File("temp.csv"))
-                        .readAllBytes();
+                byte[] test =  IOUtils.toByteArray(new FileInputStream( new File("temp.csv")));
 
                 Mockito.lenient().when(transactionService
                         .getAllData())
