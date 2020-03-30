@@ -2,7 +2,6 @@ package com.sapient.al.service.transactions;
 
 import com.sapient.al.model.Transaction;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

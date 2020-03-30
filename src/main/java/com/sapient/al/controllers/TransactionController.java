@@ -29,15 +29,20 @@ import java.util.Set;
 public class TransactionController {
 
 
-    @Autowired
-    @Qualifier("transaction_service")
-    private TransactionService transactionService;
+    private  TransactionService transactionService;
 
-    @Autowired
-    private TransactionRulesImpl intradayImpl;
+    private  TransactionRulesImpl intradayImpl;
 
-    @Autowired
-    private FileServiceFactory fileServiceFactory;
+    private  FileServiceFactory fileServiceFactory;
+
+    public TransactionController(@Qualifier("transaction_service")
+                                         TransactionService transactionService,
+                                 TransactionRulesImpl intradayImpl,
+                                 FileServiceFactory fileServiceFactory) {
+        this.transactionService = transactionService;
+        this.intradayImpl = intradayImpl;
+        this.fileServiceFactory = fileServiceFactory;
+    }
 
     @GetMapping
     public ResponseEntity<Resource> getAllTransaction(String type) throws FileTypeNotSupported, IOException {
@@ -62,7 +67,6 @@ public class TransactionController {
 
         return ResponseEntity.ok()
                 .headers(header)
-//                .contentLength(file.length())
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(fileService.writeToFile(processingFees));
 
@@ -71,8 +75,8 @@ public class TransactionController {
 
     }
 
-    @PutMapping
-    public List<Transaction> putTransactions(@RequestParam("file") MultipartFile file)
+    @PostMapping
+    public Integer putTransactions(@RequestParam("file") MultipartFile file)
             throws FileTypeNotSupported, IOException {
 
         // validate read then write field to db
@@ -87,7 +91,7 @@ public class TransactionController {
         List<Transaction> transactions = (List<Transaction>) fileService.readFile(file);
         log.info("data : {}", transactions);
         transactionService.writeData(transactions);
-        return transactions;
+        return transactions.size();
     }
 
 }

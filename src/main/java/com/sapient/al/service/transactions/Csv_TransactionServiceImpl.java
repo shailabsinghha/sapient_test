@@ -13,8 +13,11 @@ import java.util.List;
 @Slf4j
 public class Csv_TransactionServiceImpl implements TransactionService{
 
-    @Autowired
-    private TransactionRepo transactionRepo;
+    private final TransactionRepo transactionRepo;
+
+    public Csv_TransactionServiceImpl(TransactionRepo transactionRepo) {
+        this.transactionRepo = transactionRepo;
+    }
 
     @Override
     public void writeData(List<Transaction> transaction_data) {

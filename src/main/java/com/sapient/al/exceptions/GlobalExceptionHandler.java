@@ -24,7 +24,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse("Server Error", details);
-        log.debug(ex.toString());
+        log.debug(ex.getLocalizedMessage());
         return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(ex.getMessage(), details);
-        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(error, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @Override

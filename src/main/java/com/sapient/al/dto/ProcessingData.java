@@ -1,11 +1,11 @@
 package com.sapient.al.dto;
 
 import com.sapient.al.model.Transaction;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-public
-class ProcessingData{
+@AllArgsConstructor
+@Data public class ProcessingData{
 
     String clientId;
     String transactionType;

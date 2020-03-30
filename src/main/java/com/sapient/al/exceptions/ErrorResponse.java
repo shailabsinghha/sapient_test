@@ -1,9 +1,12 @@
 package com.sapient.al.exceptions;
 
+import lombok.Data;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @XmlRootElement(name = "error")
+@Data
 public class ErrorResponse
 {
     public ErrorResponse(String message, List<String> details) {
@@ -18,5 +21,5 @@ public class ErrorResponse
     //Specific errors in API request processing
     private List<String> details;
 
-    //Getter and setters
+//Getter and setters
 }
